@@ -10,9 +10,9 @@ The data used for this project is generated on a daily basis, stores it in Amazo
 
 Python - Scripting
 
-Apache Airflow – Workflow orchestration
+Apache Airflow – Workflow Orchestration
 
-Terraform – Infrastructure as code
+Terraform – Infrastructure as code (IaC)
 
 AWS S3 – Storage layer
 
