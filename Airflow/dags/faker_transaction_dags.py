@@ -3,7 +3,7 @@ from datetime import datetime
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 from airflow.providers.amazon.aws.transfers.s3_to_redshift import \
-    S3ToRedshiftOperator
+     S3ToRedshiftOperator
 
 from faker_transaction import get_transaction, upload_to_s3
 
