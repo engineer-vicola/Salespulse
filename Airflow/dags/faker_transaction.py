@@ -27,7 +27,7 @@ def get_transaction():
             'transaction_date': fake.date_time_between(
              start_date='-1y', end_date='now'),
             'payment_method': rd.choice([
-                'Credit Card', 'Debit Card', 'Cash', 'Online Transfer']),
+            'Credit Card', 'Debit Card', 'Cash', 'Online Transfer']),
             'store_location': fake.city()
         }
         transactions_data.append(transaction)
