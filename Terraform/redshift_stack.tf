@@ -187,7 +187,7 @@ resource "aws_redshift_parameter_group" "new_redshift_parameter_group" {
   family = "redshift-2.0"
   parameter {
     name  = "require_ssl"
-    value = "true"
+    value = "false"
   }
 }
 
