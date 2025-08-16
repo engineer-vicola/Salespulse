@@ -1,8 +1,8 @@
 FROM apache/airflow:2.9.0
 
-WORKDIR /app/
+WORKDIR /data/
 
-COPY requirements.txt /app/
+COPY requirements.txt /data/
 
 
 RUN pip install -r requirements.txt 

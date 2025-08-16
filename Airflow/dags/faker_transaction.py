@@ -1,16 +1,12 @@
 import random as rd
-from datetime import datetime
 from random import randint
-
 import awswrangler as wr
-import boto3
 import pandas as pd
-from airflow.models import Variable
+from Airflow.aws_utils import new_session
+from Airflow.date_utils import date_str
 from faker import Faker
 
-# Create an instance of faker
 fake = Faker()
-# Create a function
 
 
 def get_transaction():
@@ -36,26 +32,17 @@ def get_transaction():
     df['customer_id'] = df['customer_id'].astype("int32")
     df['transaction_date'] = pd.to_datetime(df['transaction_date'])
 
-    return df
-
-
-# Upload to s3
-def upload_to_s3():
-    df = get_transaction()
-    session = boto3.session.Session(
-                aws_access_key_id=Variable.get("AWS_ACCESS_KEY_ID"),
-                aws_secret_access_key=Variable.get("AWS_SECRET_ACCESS_KEY"),
-                region_name=Variable.get("REGION_NAME")
-            )
-
-    date_str = datetime.today().strftime('%Y-%m-%d')
+    session = new_session
+    new_date = date_str
     s3_bucket = 'faker-project'
     s3_folder = 'new_transaction_folder'
-    path = f"s3://{s3_bucket}/{s3_folder}/{date_str}_data_file.parquet"
+    path = f"s3://{s3_bucket}/{s3_folder}/{new_date}_data_file.parquet"
     wr.s3.to_parquet(
         df=df,
         path=path,
         dataset=False,
         index=False,
         boto3_session=session
-    )
+        )
+
+    return df

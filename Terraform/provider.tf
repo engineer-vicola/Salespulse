@@ -1,4 +1,3 @@
-# Configure the AWS Provider
 provider "aws" {
   region = "us-west-1"
 }
@@ -11,7 +10,3 @@ terraform {
     }
   }
 }
-provider "random" {
-  # Configuration options
-}
-

@@ -1,2 +1,2 @@
 awswrangler==3.12.0
-faker
+faker==37.4.2
