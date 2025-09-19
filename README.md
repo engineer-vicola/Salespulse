@@ -6,6 +6,9 @@
 SalesPulse is a simulated e-commerce platform that generates transactional data and demonstrates a full end-to-end data pipeline. The project ingests raw data, processes it through ETL workflows, and delivers analytics-ready datasets stored in Amazon Redshift to support business intelligence and reporting.
 
 
+## Architecture
+![Architecture Diagram](Docs/architecture_new.jpg)
+
 Built with:
 
 + Apache Airflow (Orchestration)
@@ -46,15 +49,16 @@ Python + pandas + awswrangler – For ETL logic
 │   ├── date_utils.py
 │   ├── docker-compose.yaml
 │   └── requirements.txt
+├── Docs
 ├── README.md
-├── Terraform
-│   ├── VPC_stacks.tf
-│   ├── backend.tf
-│   ├── bucket.tf
-│   ├── iam_policy_doc.tf
-│   ├── provider.tf
-│   ├── redshift_stack.tf
-│   └── variable.tf
+└── Terraform
+    ├── VPC_stacks.tf
+    ├── backend.tf
+    ├── bucket.tf
+    ├── iam_policy_doc.tf
+    ├── provider.tf
+    ├── redshift_stack.tf
+    └── variable.tf
 ```
 
 ## What the pipeline Does
@@ -88,7 +92,7 @@ get_transaction_data >> execute_query >> s3_to_redshift
 ## 1. Provision AWS Infrastructure with Terraform
 
 ```bash 
-cd terraform/
+cd infrastructure/
 terraform init
 terraform apply
 ```
