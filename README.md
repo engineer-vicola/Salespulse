@@ -133,5 +133,5 @@ copy_options = ["FORMAT AS PARQUET"]
 
 
 **Images from the project;**
+![Image](https://github.com/user-attachments/assets/2aeb17a4-d632-49db-94fa-dc48b958d2fe)
 
-https://github.com/engineer-vicola/Salespulse/issues/3#issue-3554207760
