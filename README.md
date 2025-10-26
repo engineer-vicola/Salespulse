@@ -134,4 +134,4 @@ copy_options = ["FORMAT AS PARQUET"]
 
 **Images from the project;**
 
-
+https://github.com/engineer-vicola/Salespulse/issues/3#issue-3554207760
