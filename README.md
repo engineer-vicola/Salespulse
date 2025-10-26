@@ -134,4 +134,6 @@ copy_options = ["FORMAT AS PARQUET"]
 
 **Images from the project;**
 ![Image](https://github.com/user-attachments/assets/2aeb17a4-d632-49db-94fa-dc48b958d2fe)
+![Image](https://github.com/user-attachments/assets/31116ac2-c47d-4ba2-b9bc-1f589008d4c0)
+
 
