@@ -22,7 +22,6 @@ default_args = {
     'retries': 1
 }
 
-
 dag = DAG(
     dag_id="transaction_job",
     description="Simulates and loads transactional data to Redshift daily",
@@ -46,7 +45,6 @@ execute_query = SQLExecuteQueryOperator(
     split_statements=True,
     return_last=False,
 )
-
 
 s3_to_redshift = S3ToRedshiftOperator(
     task_id="s3_to_redshift",

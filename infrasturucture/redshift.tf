@@ -19,20 +19,17 @@ resource "aws_iam_role" "redshift_role" {
   }
 }
 
-
 resource "aws_iam_policy" "new_redshift_policy" {
   name   = "new_redshift_policy"
   path   = "/production/new_redshift_policy/"
   policy = data.aws_iam_policy_document.redshift_policy_document.json
 }
 
-
 resource "aws_iam_policy_attachment" "new_redshift_role_policy_attachment" {
   name       = "new_redshift_role_policy_attachment"
   roles      = [aws_iam_role.redshift_role.name]
   policy_arn = aws_iam_policy.new_redshift_policy.arn
 }
-
 
 resource "random_password" "password" {
   length  = 12

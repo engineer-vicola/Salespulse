@@ -36,7 +36,6 @@ resource "aws_route_table_association" "public_subnet_1_route_table" {
   route_table_id = aws_route_table.public_subnet_1_route_table.id
 }
 
-
 resource "aws_subnet" "public_subnet_2" {
   availability_zone       = "us-west-1c"
   vpc_id                  = aws_vpc.production_secure_vpc.id
@@ -47,7 +46,6 @@ resource "aws_subnet" "public_subnet_2" {
     Name = "public_subnet_2"
   }
 }
-
 
 resource "aws_route_table" "public_subnet_2_route_table" {
   vpc_id = aws_vpc.production_secure_vpc.id
@@ -67,7 +65,6 @@ resource "aws_internet_gateway" "igw" {
   }
 }
 
-
 resource "aws_security_group" "production_security_group" {
   name        = "production_security_group"
   description = "Allow inbound traffic and all outbound traffic"
@@ -77,6 +74,7 @@ resource "aws_security_group" "production_security_group" {
     Name = "production_security_group"
   }
 }
+
 resource "aws_vpc_security_group_ingress_rule" "allow_" {
   security_group_id = aws_security_group.production_security_group.id
   cidr_ipv4         = "0.0.0.0/0"
