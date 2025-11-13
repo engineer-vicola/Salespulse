@@ -3,17 +3,17 @@
 ## End-to-End-E-commerce Data Pipeline
 
 
-SalesPulse is a simulated e-commerce platform that generates transactional data and demonstrates a full end-to-end data pipeline. The project ingests raw data, processes it through ETL workflows, and delivers analytics-ready datasets stored in Amazon Redshift to support business intelligence and reporting.
+SalesPulse is a simulated e-commerce platform that generates transactional data and demonstrates a full end-to-end data pipeline. The project invloves the ingestion of raw data, processing it through ETL workflows, and delivers analytics-ready datasets stored in Amazon Redshift to support business intelligence and reporting.
 
 
 ## Architecture
-![Architecture Diagram](Docs/architecture_new.jpg)
+![Architecture Diagram](Docs/architecture.jpg)
 
 Built with:
 
 + Apache Airflow (Orchestration)
 
-+ Python + Faker + pandas (Simulation and transformation)
++ Python + pandas (Simulation and transformation)
 
 + AWS S3 (Object storage)
 
@@ -27,7 +27,7 @@ Built with:
 
 ## Tech Stack
 
-Apache Airflow (Dockerized)
+Apache Airflow (Containerized)
 
 AWS S3 – Data Lake storage
 
@@ -43,22 +43,23 @@ Python + pandas + awswrangler – For ETL logic
 │   ├── Dockerfile
 │   ├── aws_utils.py
 │   ├── dags
-│   │   ├── faker_transaction.py
-│   │   ├── faker_transaction_dags.py
-│   │   └── my_schema.sql
+│   │   ├── sales_transaction.py
+│   │   ├── sales_transaction_dags.py
+│   │   └── sql
+│   │       └── create_table.sql
 │   ├── date_utils.py
 │   ├── docker-compose.yaml
 │   └── requirements.txt
 ├── Docs
+│   └── architecture.jpg
 ├── README.md
-└── Terraform
-    ├── VPC_stacks.tf
+└── infrasturucture
     ├── backend.tf
     ├── bucket.tf
-    ├── iam_policy_doc.tf
+    ├── data.tf
     ├── provider.tf
-    ├── redshift_stack.tf
-    └── variable.tf
+    ├── redshift.tf
+    └── vpc.tf
 ```
 
 ## What the pipeline Does
@@ -99,7 +100,7 @@ terraform apply
 
 Creates:
 
-An S3 bucket: ```faker-project```
+An S3 bucket: ```sales-project```
 
 A Redshift cluster
 

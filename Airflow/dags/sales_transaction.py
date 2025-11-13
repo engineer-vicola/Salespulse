@@ -1,12 +1,18 @@
+import logging
 import random as rd
 from random import randint
+
 import awswrangler as wr
 import pandas as pd
 from Airflow.aws_utils import new_session
 from Airflow.date_utils import date_str
 from faker import Faker
 
+logging.basicConfig(format='%(asctime)s %(levelname)s:%(name)s:%(message)s')
+logging.getLogger().setLevel(20)
+
 fake = Faker()
+logging.info("finished faker module instantiation")
 
 
 def get_transaction():
@@ -23,7 +29,7 @@ def get_transaction():
             'transaction_date': fake.date_time_between(
              start_date='-1y', end_date='now'),
             'payment_method': rd.choice([
-            'Credit Card', 'Debit Card', 'Cash', 'Online Transfer']),
+                'Credit Card', 'Debit Card', 'Cash', 'Online Transfer']),
             'store_location': fake.city()
         }
         transactions_data.append(transaction)
@@ -34,7 +40,7 @@ def get_transaction():
 
     session = new_session
     new_date = date_str
-    s3_bucket = 'faker-project'
+    s3_bucket = 'sales-project'
     s3_folder = 'new_transaction_folder'
     path = f"s3://{s3_bucket}/{s3_folder}/{new_date}_data_file.parquet"
     wr.s3.to_parquet(
@@ -45,4 +51,4 @@ def get_transaction():
         boto3_session=session
         )
 
-    return df
+    return "Data written to S3 completed successfully"

@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "transaction" {
-  bucket = "faker-project"
+  bucket = "sales-project"
 
   tags = {
     Name        = "transaction"

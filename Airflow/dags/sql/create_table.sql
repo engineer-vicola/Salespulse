@@ -1,4 +1,4 @@
-CREATE TABLE transactions (
+CREATE TABLE IF NOT EXISTS transactions (
     first_name VARCHAR(50),
     lastname VARCHAR(50),
     transaction_id VARCHAR(50),

@@ -1,16 +1,15 @@
 from datetime import datetime
 
 from airflow import DAG
+from Airflow.dags.sales_transaction import get_transaction
 from Airflow.date_utils import date_str
 from airflow.operators.python import PythonOperator
 from airflow.providers.amazon.aws.transfers.s3_to_redshift import \
     S3ToRedshiftOperator
 from airflow.providers.common.sql.operators.sql import SQLExecuteQueryOperator
 
-from faker_transaction import get_transaction
-
 new_date = date_str
-S3_BUCKET = "faker-project"
+S3_BUCKET = "sales-project"
 S3_KEY = f"new_transaction_folder/{new_date}_data_file.parquet"
 REDSHIFT_SCHEMA = "public"
 REDSHIFT_TABLE = "transactions"
@@ -19,7 +18,7 @@ AWS_CONN_ID = "aws_default"
 
 
 default_args = {
-    'owner': 'data_engineering_project',
+    'owner': 'Data Engineering Team',
     'retries': 1
 }
 
@@ -42,8 +41,8 @@ get_transaction_data = PythonOperator(
 execute_query = SQLExecuteQueryOperator(
     task_id="execute_query",
     conn_id=REDSHIFT_CONN_ID,
-    database="new_redshift_victordb",
-    sql="my_schema.sql",
+    database="new_redshift_salesdb",
+    sql="./sql/create_table.sql",
     split_statements=True,
     return_last=False,
 )

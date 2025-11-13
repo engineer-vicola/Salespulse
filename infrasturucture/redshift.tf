@@ -57,10 +57,19 @@ resource "aws_redshift_parameter_group" "new_redshift_parameter_group" {
   }
 }
 
+resource "aws_redshift_subnet_group" "production_subnet_group" {
+  name       = "production-subnet-group"
+  subnet_ids = [aws_subnet.public_subnet_1.id, aws_subnet.public_subnet_2.id]
+
+  tags = {
+    environment = "Production"
+  }
+}
+
 resource "aws_redshift_cluster" "new_redshift_job" {
   cluster_identifier               = "new-redshift-cluster"
-  database_name                    = "new_redshift_victordb"
-  master_username                  = "new_victor_job"
+  database_name                    = "new_redshift_sales_db"
+  master_username                  = data.aws_ssm_parameter.new_redshift_db_username.value
   master_password                  = aws_ssm_parameter.new_redshift_db_password.value
   node_type                        = "ra3.xlplus"
   cluster_type                     = "multi-node"

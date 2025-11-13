@@ -1,5 +1,5 @@
 resource "aws_vpc" "production_secure_vpc" {
-  cidr_block           = var.vpc_cidr_block
+  cidr_block           = "10.0.0.0/16"
   enable_dns_hostnames = true
 
   tags = {
@@ -10,7 +10,7 @@ resource "aws_vpc" "production_secure_vpc" {
 resource "aws_subnet" "public_subnet_1" {
   availability_zone       = "us-west-1a"
   vpc_id                  = aws_vpc.production_secure_vpc.id
-  cidr_block              = var.public_subnet_cidr_1
+  cidr_block              = "10.0.0.0/24"
   map_public_ip_on_launch = true
 
   tags = {
@@ -22,7 +22,7 @@ resource "aws_route_table" "public_subnet_1_route_table" {
   vpc_id = aws_vpc.production_secure_vpc.id
 
   route {
-    cidr_block = var.internet_cidr
+    cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.igw.id
   }
 
@@ -40,7 +40,7 @@ resource "aws_route_table_association" "public_subnet_1_route_table" {
 resource "aws_subnet" "public_subnet_2" {
   availability_zone       = "us-west-1c"
   vpc_id                  = aws_vpc.production_secure_vpc.id
-  cidr_block              = var.public_subnet_cidr_2
+  cidr_block              = "10.0.1.0/24"
   map_public_ip_on_launch = true
 
   tags = {
@@ -79,7 +79,7 @@ resource "aws_security_group" "production_security_group" {
 }
 resource "aws_vpc_security_group_ingress_rule" "allow_" {
   security_group_id = aws_security_group.production_security_group.id
-  cidr_ipv4         = var.internet_cidr
+  cidr_ipv4         = "0.0.0.0/0"
   from_port         = 5439
   ip_protocol       = "tcp"
   to_port           = 5439
@@ -87,15 +87,7 @@ resource "aws_vpc_security_group_ingress_rule" "allow_" {
 
 resource "aws_vpc_security_group_egress_rule" "allow_all_traffic_ipv4" {
   security_group_id = aws_security_group.production_security_group.id
-  cidr_ipv4         = var.internet_cidr
+  cidr_ipv4         = "0.0.0.0/0"
   ip_protocol       = "-1"
 }
 
-resource "aws_redshift_subnet_group" "production_subnet_group" {
-  name       = "production-subnet-group"
-  subnet_ids = [aws_subnet.public_subnet_1.id, aws_subnet.public_subnet_2.id]
-
-  tags = {
-    environment = "Production"
-  }
-}
